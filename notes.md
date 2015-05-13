@@ -1,5 +1,7 @@
 # Udacity Project 5, Linux Server Configuration
 
+-Note: grader's password is 'password' without the quotes. 
+
 - Create new user called grader, give sudo, give ssh access
 
 `adduser grader`
