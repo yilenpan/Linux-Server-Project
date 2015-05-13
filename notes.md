@@ -3,12 +3,19 @@
 - Create new user called grader, give sudo, give ssh access
 
 `adduser grader`
+
 `adduser grader sudo`
+
 `sudo su - grader`
+
 `mkdir .ssh`
+
 `sudo chmod 700 .ssh`
+
 `sudo touch .ssh/authorized_keys`
+
 `sudo chmod 600 .ssh/authorized_keys`
+
 
 copy over the root's authorized_keys to grader's authorized keys
 Log out of the ssh shell
@@ -26,6 +33,7 @@ Find line `Port` and set it to 2200
 - Update packages, install goaccess and fail2ban
 
 `sudo apt-get update`
+
 `sudo apt-get install cron-apt goaccess fail2ban`
 
 goaccess - allows you to watch incoming requests by binding to apache2 access log
@@ -37,6 +45,7 @@ fail2ban - adds ip to ban list if multiple failed authentication attempts > 3
 - set firewall by configuring iptables
 
 See current settings by typing
+
 `sudo iptables -L`
 
 Allow established sessions
@@ -45,15 +54,22 @@ Allow established sessions
 
 Allow certain ports
 
+
 `sudo iptables -A INPUT -p tcp --dport 2200 -j ACCEPT`
+
 `sudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT`
+
 `sudo iptables -A INPUT -p tcp --dport 443 -j ACCEPT`
+
 `sudo iptables -A INPUT -p tcp --dport 123 -j ACCEPT`
 
+
 Port 53 is domain name service - need it for apt-get
+
 `sudo iptables -A INPUT -p tcp --dport 53 -j ACCEPT`
 
 Drop any connection to any port not listed here
+
 
 `sudo iptables -A INPUT -j DROP`
 
@@ -61,9 +77,11 @@ Drop any connection to any port not listed here
 
 FIrst we need to install apache, the modwsgi lib for apache and python-dev
 
+
 `sudo apt-get install apache2 libapache2-mod-wsgi python-dev`
 
 enable mod_wsgi by running
+
 
 `sudo a2enmod wsgi`
 
